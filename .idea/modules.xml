@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/CDIO3_23.iml" filepath="$PROJECT_DIR$/.idea/CDIO3_23.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CDIO_Maven/CDIO_Maven.iml" filepath="$PROJECT_DIR$/CDIO_Maven/CDIO_Maven.iml" />
       <module fileurl="file://$PROJECT_DIR$/Skabeloner/Skabeloner.iml" filepath="$PROJECT_DIR$/Skabeloner/Skabeloner.iml" />
     </modules>
   </component>
