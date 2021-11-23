@@ -8,8 +8,4 @@ public class StartField extends Field {
         super(name, subtext);
     }
 
-    @Override
-    public void fieldEffect(Player player) {
-        player.addMoney(2);
-    }
 }
