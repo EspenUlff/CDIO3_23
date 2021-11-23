@@ -1,5 +1,7 @@
 package Model;
 
+import gui_fields.GUI_Player;
+
 public class Player {
     private String name;
     private int money;
