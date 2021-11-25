@@ -75,7 +75,7 @@ public class GameView {
     }
 
     private GUI_Street translateGameField(PropertyField field) {
-        return new GUI_Street(field.name, field.subtext, "", field.rent + "M", Color.WHITE, Color.BLACK);
+        return new GUI_Street(field.name, field.subtext, "", field.rent + "M", field.color, Color.BLACK);
     }
 
     private GUI_Start translateGameField(StartField field) {

@@ -22,11 +22,11 @@ public class Game {
     public Game(GameView view) {
         this.view = view;
 
-        int playerAmount = this.view.ui.getUserInteger("How many players?", Config.MIN_PLAYERS, Config.MAX_PLAYERS);
+        int playerAmount = this.view.ui.getUserInteger("Hvor mange spillere? (mellem 2-4)", Config.MIN_PLAYERS, Config.MAX_PLAYERS);
         String[] playerNames = new String[playerAmount];
 
         for (int i = 0; i < playerAmount; i++) {
-            playerNames[i] = this.view.ui.getUserString("What is the name of player " + i + "?");
+            playerNames[i] = this.view.ui.getUserString("Hvad er navnet på spiller" + (i + 1) + "?");
         }
 
         Player[] players = new Player[playerNames.length];
@@ -86,16 +86,19 @@ public class Game {
 
         Field playerField = fields[player.position];
         if (playerField instanceof PropertyField field) {
-            action = view.ui.getUserButtonPressed(player.name + "'s turn. Pick an action", Config.ACTIONS_PROPERTY);
+            if (field.owner == null) {
+                action = view.ui.getUserButtonPressed(player.name + "'s turn. Pick an action", Config.ACTIONS_PROPERTY);
 
-            // We only check for the first action since the other simply skips the purchase and goes on with the turn
-            if (action.equals(Config.ACTIONS_PROPERTY[0])) {
-                if (player.getMoney() < field.price) {
-                    view.ui.getUserButtonPressed("You don't have enough money for that", "Ok");
-                } else {
-                    player.addMoney(-field.price);
-                    field.owner = player;
-                    view.updatePlayer(player);
+                // We only check for the first action since the other simply skips the purchase and goes on with the turn
+                if (action.equals(Config.ACTIONS_PROPERTY[0])) {
+                    if (player.getMoney() < field.price) {
+                        view.ui.getUserButtonPressed("Du har ikke nok penge", "Ok");
+                    } else {
+                        player.addMoney(-field.price);
+                        field.owner = player;
+                        view.updatePlayer(player);
+                        view.buyField(player);
+                    }
                 }
             }
         }
