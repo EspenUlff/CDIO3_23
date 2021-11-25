@@ -24,7 +24,7 @@ public class FieldFactory {
                 new ChanceField("?", "Chance WIP"),
                 new PropertyField("Legetøjsbutikken", "3 M", 3, 3, Color.YELLOW),
                 new PropertyField("Dyrehandlen", "3 M", 3, 3, Color.YELLOW),
-                new GoToJailField("Gå i Fængsel", "WIP"),
+                new GoToJailField("Gå i Fængsel", "Gå i Fængsel"),
                 new PropertyField("Bowlinghallen", "4 M", 4, 4, Color.GREEN),
                 new PropertyField("Zoologiskhave", "4 M", 4, 4, Color.GREEN),
                 new ChanceField("?", "Chance WIP"),
