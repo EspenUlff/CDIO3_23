@@ -6,7 +6,6 @@ import java.awt.Color;
 
 public class PropertyField extends Field {
     public final int price;
-    public final int rent;
     public final Color color;
 
     public int rent;

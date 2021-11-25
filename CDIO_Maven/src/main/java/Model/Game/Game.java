@@ -9,6 +9,7 @@ import Model.Player;
 import View.GameView;
 
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class Game {
@@ -52,6 +53,7 @@ public class Game {
         for (Player player : players) {
             // active = player;
             playTurn(player);
+            updateUI();
         }
     }
 
@@ -99,6 +101,7 @@ public class Game {
                         field.owner = player;
                         view.updatePlayer(player);
                         view.buyField(player);
+                        doubleRentIfSameOwner(field);
                     }
                 }
             } else view.updatePlayer(field.owner);
@@ -121,6 +124,33 @@ public class Game {
 
         // Check if the player passed the start field and give money if they do
         if (player.position < player.prevPosition) player.addMoney(Config.ROUND_MONEY);
+    }
+
+    private List<PropertyField> findSameColorFields(PropertyField field) {
+        List<PropertyField> colorFields = new LinkedList<>();
+
+        for (Field f : fields) {
+            if (f instanceof PropertyField f1) {
+                if (f1.color == field.color) {
+                    colorFields.add(f1);
+                }
+            }
+        }
+
+        return colorFields;
+    }
+
+    private void doubleRentIfSameOwner(PropertyField field) {
+        List<PropertyField> colors = findSameColorFields(field);
+        Player owner = colors.get(0).owner;
+
+        for (PropertyField f : colors) {
+            if (f.owner != owner) return;
+        }
+
+        for (PropertyField f : colors) {
+            f.rent += f.rent;
+        }
     }
 
     /**
