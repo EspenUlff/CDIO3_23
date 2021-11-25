@@ -17,7 +17,6 @@ public class Game {
     public Field[] fields = FieldFactory.MakeFields();
     public boolean ended = false;
     public Player[] players;
-    // public Player active;
     public GameView view;
 
     public Game(GameView view) {
@@ -40,20 +39,25 @@ public class Game {
         view.resetBoard();
 
         this.players = players;
-        // this.active = players[0];
     }
 
     public void run() {
         while (!ended) {
             playRound();
         }
+
+        Player winner = players[0];
+        for (Player p : players)
+            if (p.getMoney() > winner.getMoney()) winner = p;
+
+        view.ui.getUserButtonPressed("Spillet er slut! " + winner.name + " er vinderen.", "Afslut");
     }
 
     public void playRound() {
         for (Player player : players) {
-            // active = player;
             playTurn(player);
             updateUI();
+            ended = ended || player.getMoney() == 0;
         }
     }
 
@@ -62,7 +66,7 @@ public class Game {
      *
      * @param player Player whose turn it is
      */
-    private void playTurn(Player player) {
+    public void playTurn(Player player) {
         String action;
         if (player.inJail) {
             if (player.outOfJailFree) {
