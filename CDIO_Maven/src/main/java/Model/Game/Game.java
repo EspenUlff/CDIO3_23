@@ -150,6 +150,7 @@ public class Game {
 
         for (PropertyField f : colors) {
             f.rent += f.rent;
+            view.updateField(f);
         }
     }
 

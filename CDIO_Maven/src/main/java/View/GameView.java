@@ -35,6 +35,19 @@ public class GameView {
         return guiPlayer;
     }
 
+    public GUI_Field findGuiField(Field field) {
+        GUI_Field guiField = null;
+
+        for (GUI_Field f : fields) {
+            if (f.getTitle().equals(field.name)) {
+                guiField = f;
+                break;
+            }
+        }
+
+        return guiField;
+    }
+
     public void updatePlayer(Player player) {
         GUI_Player guiPlayer = findGuiPlayer(player);
 
@@ -74,6 +87,14 @@ public class GameView {
         GUI_Ownable ownedField = ((GUI_Ownable) fields[player.position]);
         ownedField.setOwnerName(player.name);
         ownedField.setBorder(guiPlayer.getPrimaryColor());
+    }
+
+    public void updateField(PropertyField field) {
+        GUI_Field guiField = findGuiField(field);
+
+        if (guiField instanceof GUI_Ownable guiOwnable) {
+            guiOwnable.setRent(field.rent + "M");
+        }
     }
 
     private GUI_Chance translateGameField(ChanceField field) {
