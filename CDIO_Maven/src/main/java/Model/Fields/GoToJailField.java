@@ -10,8 +10,7 @@ public class GoToJailField extends Field{
 
     @Override
     public void fieldEffect(Player player) {
-        //en setter til den givne spillers position
-        player.setPosition(Config.JAIL_FIELD);
-        player.setInJail(true);
+        player.position = Config.JAIL_FIELD;
+        player.inJail = true;
     }
 }
