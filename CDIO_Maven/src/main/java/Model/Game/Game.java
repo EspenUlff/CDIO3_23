@@ -67,6 +67,7 @@ public class Game {
                 player.outOfJailFree = false;
             } else {
                 player.addMoney(-1);
+                view.updatePlayer(player);
             }
         }
 
@@ -101,6 +102,7 @@ public class Game {
                     }
                 }
             }
+            else view.updatePlayer(field.owner);
         }
 
         action = view.ui.getUserButtonPressed(player.name + "'s turn. Pick an action", Config.ACTIONS_END_TURN);

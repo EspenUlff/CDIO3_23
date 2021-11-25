@@ -6,7 +6,6 @@ import gui_fields.*;
 import gui_main.GUI;
 
 import java.awt.Color;
-import java.util.Objects;
 
 public class GameView {
     public final GUI ui;
@@ -20,10 +19,10 @@ public class GameView {
             this.fields[i] = translateGameField(gameFields[i]);
         }
 
-        this.ui = new GUI(this.fields);
+        this.ui = new GUI(this.fields, new Color(160, 160, 160));
     }
 
-    public void updatePlayer(Player player) {
+    public GUI_Player findGuiPlayer(Player player) {
         GUI_Player guiPlayer = null;
 
         for (GUI_Player p : players) {
@@ -33,13 +32,24 @@ public class GameView {
             }
         }
 
-        Objects.requireNonNull(guiPlayer).setBalance(player.getMoney());
+        return guiPlayer;
+    }
+
+    public void updatePlayer(Player player) {
+        GUI_Player guiPlayer = findGuiPlayer(player);
+
+        guiPlayer.setBalance(player.getMoney());
         fields[player.prevPosition].setCar(guiPlayer, false);
         fields[player.position].setCar(guiPlayer, true);
     }
 
     public void setPlayers(Player... gamePlayers) {
-        Color[] carColors = {Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK, Color.MAGENTA};
+        Color[] carColors = {
+                new Color(101, 101, 210),
+                new Color(194, 79, 79),
+                new Color(222, 116, 48),
+                new Color(10, 89, 10)
+        };
         players = new GUI_Player[gamePlayers.length];
 
         for (int i = 0; i < players.length; i++) {
@@ -58,8 +68,16 @@ public class GameView {
         }
     }
 
+    public void buyField(Player player) {
+        GUI_Player guiPlayer = findGuiPlayer(player);
+
+        GUI_Ownable ownedField = ((GUI_Ownable) fields[player.position]);
+        ownedField.setOwnerName(player.name);
+        ownedField.setBorder(guiPlayer.getPrimaryColor());
+    }
+
     private GUI_Chance translateGameField(ChanceField field) {
-        return new GUI_Chance(field.name, field.subtext, "", Color.WHITE, Color.BLACK);
+        return new GUI_Chance(field.name, field.subtext, "", Color.BLACK, Color.WHITE);
     }
 
     private GUI_Jail translateGameField(GoToJailField field) {
