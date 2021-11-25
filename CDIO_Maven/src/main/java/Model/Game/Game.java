@@ -83,13 +83,13 @@ public class Game {
         boolean extraTurn = rolls[0] == rolls[1];
 
         movePlayerForward(player, rollSum);
-        fields[player.position].fieldEffect(player);
+        fields[player.getPosition()].fieldEffect(player);
 
         view.updatePlayer(player);
 
-        Field playerField = fields[player.position];
+        Field playerField = fields[player.getPosition()];
         if (playerField instanceof PropertyField field) {
-            if (field.owner == null) {
+            if (field.getOwner() == null) {
                 action = view.ui.getUserButtonPressed(player.name + "'s turn. Pick an action", Config.ACTIONS_PROPERTY);
 
                 // We only check for the first action since the other simply skips the purchase and goes on with the turn
@@ -98,13 +98,13 @@ public class Game {
                         view.ui.getUserButtonPressed("Du har ikke nok penge", "Ok");
                     } else {
                         player.addMoney(-field.price);
-                        field.owner = player;
+                        field.setOwner(player);
                         view.updatePlayer(player);
                         view.buyField(player);
                         doubleRentIfSameOwner(field);
                     }
                 }
-            } else view.updatePlayer(field.owner);
+            } else view.updatePlayer(field.getOwner());
         }
 
         action = view.ui.getUserButtonPressed(player.name + "'s turn. Pick an action", Config.ACTIONS_END_TURN);
@@ -119,11 +119,10 @@ public class Game {
      * @param amount Amount of spaces to move
      */
     private void movePlayerForward(Player player, int amount) {
-        player.prevPosition = player.position;
-        player.position = (player.position + amount) % fields.length;
+        player.setPosition((player.getPosition() + amount) % fields.length);
 
         // Check if the player passed the start field and give money if they do
-        if (player.position < player.prevPosition) player.addMoney(Config.ROUND_MONEY);
+        if (player.getPosition() < player.getPrevPosition()) player.addMoney(Config.ROUND_MONEY);
     }
 
     private List<PropertyField> findSameColorFields(PropertyField field) {
@@ -142,10 +141,10 @@ public class Game {
 
     private void doubleRentIfSameOwner(PropertyField field) {
         List<PropertyField> colors = findSameColorFields(field);
-        Player owner = colors.get(0).owner;
+        Player owner = colors.get(0).getOwner();
 
         for (PropertyField f : colors) {
-            if (f.owner != owner) return;
+            if (f.getOwner() != owner) return;
         }
 
         for (PropertyField f : colors) {

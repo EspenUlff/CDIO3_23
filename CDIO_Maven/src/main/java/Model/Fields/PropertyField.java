@@ -9,7 +9,7 @@ public class PropertyField extends Field {
     public final Color color;
 
     public int rent;
-    public Player owner;
+    private Player owner;
 
     public PropertyField(String name, String subtext, int price, int rent, Color color) {
         super(name, subtext);
@@ -25,5 +25,13 @@ public class PropertyField extends Field {
             player.addMoney(-rent);
             owner.addMoney(rent);
         }
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player owner) {
+        if (this.owner == null) this.owner = owner;
     }
 }

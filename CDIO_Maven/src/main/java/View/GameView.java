@@ -52,8 +52,8 @@ public class GameView {
         GUI_Player guiPlayer = findGuiPlayer(player);
 
         guiPlayer.setBalance(player.getMoney());
-        fields[player.prevPosition].setCar(guiPlayer, false);
-        fields[player.position].setCar(guiPlayer, true);
+        fields[player.getPrevPosition()].setCar(guiPlayer, false);
+        fields[player.getPosition()].setCar(guiPlayer, true);
     }
 
     public void setPlayers(Player... gamePlayers) {
@@ -84,7 +84,7 @@ public class GameView {
     public void buyField(Player player) {
         GUI_Player guiPlayer = findGuiPlayer(player);
 
-        GUI_Ownable ownedField = ((GUI_Ownable) fields[player.position]);
+        GUI_Ownable ownedField = ((GUI_Ownable) fields[player.getPosition()]);
         ownedField.setOwnerName(player.name);
         ownedField.setBorder(guiPlayer.getPrimaryColor());
     }

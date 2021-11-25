@@ -5,8 +5,9 @@ import Model.Game.Config;
 public class Player {
     public final String name;
     private int money = Config.START_MONEY;
-    public int prevPosition = 0;
-    public int position = 0;
+
+    private int prevPosition = 0;
+    private int position = 0;
     public boolean inJail = false;
 
     public boolean outOfJailFree = false;
@@ -30,5 +31,18 @@ public class Player {
 
     public void addMoney(int value) {
         this.money += value;
+    }
+
+    public int getPrevPosition() {
+        return prevPosition;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.prevPosition = this.position;
+        this.position = position;
     }
 }
