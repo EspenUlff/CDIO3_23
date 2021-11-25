@@ -16,10 +16,9 @@ public class PropertyField extends Field{
 
     @Override
     public void fieldEffect(Player player) {
-        if (owner != null){
+        if (owner != null) {
             player.addMoney(-rent);
             owner.addMoney(rent);
-
         }
     }
 }
