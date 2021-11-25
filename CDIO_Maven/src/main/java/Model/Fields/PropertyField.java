@@ -9,14 +9,15 @@ public class PropertyField extends Field {
     public final int rent;
     public final Color color;
 
+    public int rent;
     public Player owner;
 
     public PropertyField(String name, String subtext, int price, int rent, Color color) {
         super(name, subtext);
         this.price = price;
         this.color = color;
-        this.owner = null;
         this.rent = rent;
+        this.owner = null;
     }
 
     @Override

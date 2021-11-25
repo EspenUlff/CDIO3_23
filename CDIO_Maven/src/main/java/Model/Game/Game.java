@@ -101,8 +101,7 @@ public class Game {
                         view.buyField(player);
                     }
                 }
-            }
-            else view.updatePlayer(field.owner);
+            } else view.updatePlayer(field.owner);
         }
 
         action = view.ui.getUserButtonPressed(player.name + "'s turn. Pick an action", Config.ACTIONS_END_TURN);
