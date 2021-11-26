@@ -17,11 +17,12 @@ class GameTest {
     void setUp() {
         view = new GameView(FieldFactory.MakeFields());
         game = new Game(view);
-        players = new Player[] {new Player("Test 1")};
+        players = new Player[] {new Player("Test 1", 0)};
     }
 
     @Test
     void playTurnTest() {
-        game.playTurn(players[0]);
+        game.playRound();
+        assertTrue(game.ended);
     }
 }
