@@ -57,7 +57,7 @@ public class Game {
         for (Player player : players) {
             playTurn(player);
             updateUI();
-            ended = ended || player.getMoney() == 0;
+            ended = ended || player.getMoney() <= 0;
         }
     }
 
