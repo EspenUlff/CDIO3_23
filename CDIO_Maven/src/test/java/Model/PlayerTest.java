@@ -10,7 +10,7 @@ class PlayerTest {
 
     @Test
     void getMoney() {
-        Player p = new Player("millions",20);
-        assertEquals("millions",p.getMoney());
+        Player p = new Player("m",20);
+        assertEquals("m",p.getMoney());
     }
 }
